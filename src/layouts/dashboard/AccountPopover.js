@@ -7,6 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
+import { signOutUser } from '../../sections/auth/firebase/request';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,7 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+    signOutUser();
   };
 
   return (
