@@ -13,7 +13,7 @@ export default function App() {
     <ThemeProvider>
       <ScrollToTop />
       <BaseOptionChartStyle />
-      <Router />
+      <Router/>
     </ThemeProvider>
   );
 }
