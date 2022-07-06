@@ -16,9 +16,10 @@ const PopperStyle = styled((props) => <Popper placement="bottom-start" {...props
 
 BlogPostsSearch.propTypes = {
   posts: PropTypes.array.isRequired,
+  setSearchValue: PropTypes.func.isRequired
 };
 
-export default function BlogPostsSearch({ posts }) {
+export default function BlogPostsSearch({ posts, setSearchValue }) {
   return (
     <Autocomplete
       sx={{ width: 280 }}
@@ -32,6 +33,7 @@ export default function BlogPostsSearch({ posts }) {
         <TextField
           {...params}
           placeholder="Search post..."
+          onChange={(e) => setSearchValue(e.target.value)}
           InputProps={{
             ...params.InputProps,
             startAdornment: (
