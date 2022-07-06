@@ -9,6 +9,7 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
+import Project from './pages/Project';
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +36,7 @@ export default function Router() {
           <Route path="/dashboard/user" element={<User />} />
           <Route path="/dashboard/products" element={<Products />} />
           <Route path="/dashboard/blog" element={<Blog />} />
-          <Route path="/dashboard/project" element={<Navigate to="/dashboard/app"/>} />
+          <Route path="/dashboard/project" element={<Project/>} />
           <Route path="/dashboard/*" element={<Navigate to="/404" />} />
         </Route>
       </Route>
