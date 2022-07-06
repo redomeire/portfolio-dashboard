@@ -2,6 +2,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
+import React from 'react';
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
@@ -19,6 +20,8 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
+  const [searchValue, setSearchValue] = React.useState('');
+
   return (
     <Page title="Dashboard: Blog">
       <Container>
@@ -32,12 +35,16 @@ export default function Blog() {
         </Stack>
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostsSearch posts={POSTS} />
+          <BlogPostsSearch posts={POSTS} setSearchValue={setSearchValue}/>
           <BlogPostsSort options={SORT_OPTIONS} />
         </Stack>
 
         <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
+        {POSTS.filter(item => {
+            if (searchValue === '')
+              return item;
+            return item.title.toLowerCase().includes(searchValue.toLowerCase());
+          }).map((post, index) => (
             <BlogPostCard key={post.id} post={post} index={index} />
           ))}
         </Grid>

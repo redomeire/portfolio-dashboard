@@ -13,10 +13,10 @@ const registerUser = (email, password) => {
 }
 
 const loginUser = (email, password) => {
-    const user = signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
         .then(res => {
-            console.log(res);
-            localStorage.setItem("Authorization", user.user?.accessToken);
+            console.log(res.user.accessToken);
+            localStorage.setItem("Authorization", res.user?.accessToken);
             setInterval(() => {
                 window.location.reload();
             }, 1000)

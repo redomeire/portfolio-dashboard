@@ -42,8 +42,11 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
-    signOutUser();
   };
+
+  const handleLogout = () => {
+    signOutUser();
+  }
 
   return (
     <>
@@ -103,7 +106,10 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={() => {
+          handleClose();
+          handleLogout();
+        }} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

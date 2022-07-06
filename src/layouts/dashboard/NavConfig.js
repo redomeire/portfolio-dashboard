@@ -27,9 +27,9 @@ const navConfig = [
     icon: getIcon('eva:file-text-fill'),
   },
   {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon('eva:alert-triangle-fill'),
+    title: 'My Project',
+    path: '/dashboard/project',
+    icon: getIcon('eos-icons:project')
   },
 ];
 
