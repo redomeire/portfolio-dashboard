@@ -35,6 +35,7 @@ export default function Router() {
           <Route path="/dashboard/user" element={<User />} />
           <Route path="/dashboard/products" element={<Products />} />
           <Route path="/dashboard/blog" element={<Blog />} />
+          <Route path="/dashboard/project" element={<Navigate to="/dashboard/app"/>} />
           <Route path="/dashboard/*" element={<Navigate to="/404" />} />
         </Route>
       </Route>
