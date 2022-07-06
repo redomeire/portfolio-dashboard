@@ -1,7 +1,6 @@
-import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
-import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Blog from './pages/Blog';
 import User from './pages/User';
@@ -14,48 +13,40 @@ import DashboardApp from './pages/DashboardApp';
 // ----------------------------------------------------------------------
 
 const PrivateRoute = () => {
-  if(localStorage.getItem("Authorization"))
-  return <Outlet/>
-  
-  return <Navigate to="/login"/>
+  if (localStorage.getItem("Authorization"))
+    return <Outlet />
+
+  return <Navigate to="/login" />
 }
 
 const AuthRoute = () => {
-  if(localStorage.getItem("Authorization"))
-  return <Navigate to="/dashboard/app"/>
+  if (localStorage.getItem("Authorization"))
+    return <Navigate to="/dashboard/app" />
 
-  return <Outlet/>
+  return <Outlet />
 }
 
 export default function Router() {
-  return useRoutes([
-    {
-      element: <PrivateRoute/>,
-      children: [
-      { path: '/dashboard', element: <DashboardLayout />, children: [
-        { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> },
-      ],},
-    ]
-    },
-    {
-      element: <AuthRoute/>,
-      children: [
-        {
-          path: '/', element: <LogoOnlyLayout/>, children: [
-            { path: '/', element: <Navigate to="/dashboard/app" /> },
-            { path: 'login', element: <Login /> },
-            { path: 'register', element: <Register /> },
-            { path: '404', element: <NotFound /> },
-            { path: '*', element: <Navigate to="/404" /> },
-          ],
-        }
-      ]
-    },
-    { path: '*', element: <Navigate to="/404" replace /> },
-  ]);
+  return (
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="/dashboard/app" element={<DashboardApp />} />
+          <Route path="/dashboard/user" element={<User />} />
+          <Route path="/dashboard/products" element={<Products />} />
+          <Route path="/dashboard/blog" element={<Blog />} />
+          <Route path="/dashboard/*" element={<Navigate to="/404" />} />
+        </Route>
+      </Route>
+      <Route element={<AuthRoute />}>
+        <Route path='/' element={<Navigate to="/dashboard/app" />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Route>
+      <Route path='/404' element={<NotFound />} />
+      <Route path='/*' element={<Navigate to="/404" />} />
+    </Routes>
+  );
 }
 
-export {PrivateRoute, AuthRoute};
+export { PrivateRoute, AuthRoute };
