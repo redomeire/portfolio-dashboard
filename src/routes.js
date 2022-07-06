@@ -43,7 +43,7 @@ export default function Router() {
       <Route element={<AuthRoute />}>
         <Route path='/' element={<Navigate to="/dashboard/app" />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        {/* <Route path='/register' element={<Register />} /> */}
       </Route>
       <Route path='/404' element={<NotFound />} />
       <Route path='/*' element={<Navigate to="/404" />} />
