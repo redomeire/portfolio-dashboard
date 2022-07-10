@@ -43,7 +43,7 @@ export default function Blog() {
         {POSTS.filter(item => {
             if (searchValue === '')
               return item;
-            return item.title.toLowerCase().includes(searchValue.toLowerCase());
+            return item.name.toLowerCase().includes(searchValue.toLowerCase());
           }).map((post, index) => (
             <BlogPostCard key={post.id} post={post} index={index} />
           ))}

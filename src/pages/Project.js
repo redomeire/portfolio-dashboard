@@ -1,5 +1,5 @@
 // material
-import { Grid, Container, Stack, Typography, Skeleton, Box } from '@mui/material';
+import { Container, Stack, Typography, Skeleton, Box } from '@mui/material';
 import React, { useEffect } from 'react';
 // firebase
 import { getDocs } from 'firebase/firestore';
@@ -9,9 +9,7 @@ import { FormDialog } from '../sections/@dashboard/project/FormDialog';
 import Page from '../components/Page';
 import { BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
 // mock
-import POSTS from '../_mock/blog';
 import ProjectPostCard from '../sections/@dashboard/project/ProjectPostCard';
-import { projectData } from '../_mock/project';
 
 const SORT_OPTIONS = [
   { value: 'latest', label: 'Latest' },
@@ -29,10 +27,9 @@ export default function Project() {
       .then(snapshot => {
         snapshot.docs.forEach(doc => {
           datas.push({ ...doc.data(), id: doc.id });
+          /* projects([{...doc.data(), id: doc.id}]) */
         })
-        setTimeout(() => {
-          setProjects(datas);
-        }, 1000)
+        setProjects(datas);
         console.log(datas)
       })
       .catch(err => {
@@ -51,7 +48,7 @@ export default function Project() {
         </Stack>
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostsSearch posts={POSTS} setSearchValue={setSearchValue} />
+          <BlogPostsSearch posts={projects} setSearchValue={setSearchValue} />
           <BlogPostsSort options={SORT_OPTIONS} />
         </Stack>
 
@@ -71,7 +68,7 @@ export default function Project() {
                   return item;
                 return item.name.toUpperCase().includes(searchValue.toUpperCase());
               }).map((post, index) => (
-                <ProjectPostCard key={post.id} createdAt={post.createdAt} index={index} name={post.name} description={post.description} techStack={post.techStack} url={post.url} />
+                <ProjectPostCard key={post.id} id={post.id} createdAt={post.createdAt} index={index} name={post.name} description={post.description} techStack={post.techStack} url={post.url} />
               ))}
             </Box>
         }

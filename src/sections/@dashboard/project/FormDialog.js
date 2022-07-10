@@ -40,6 +40,7 @@ function SimpleDialog(props) {
           console.log("success adding project ", res);
           setIsSuccess(true);
           setShowAlert(true);
+          window.location.reload();
       })
       .catch(err => {
           console.log("error adding project : ", err);
@@ -76,10 +77,10 @@ function SimpleDialog(props) {
       { showAlert && <CustomAlert severity={isSuccess ? "success" : "error"} sx={{marginBottom: "20px"}} onClose={() => { setShowAlert(false) }}>{isSuccess ? "Success adding project" : "Error adding project"}</CustomAlert> }
       <form onSubmit={handleSubmit} style={{width: "100%"}}>
                 <Stack>
-                    <TextField label="Project Name" type="text" onChange={(e) => setProjectName(e.target.value)} sx={{marginBottom: "20px"}} required/>
-                    <TextField label="Tech Stacks" type="text" onChange={(e) => setTechStack(e.target.value)} sx={{marginBottom: "20px"}} required/>
-                    <TextField label="Url" type="text" onChange={(e) => setUrl(e.target.value)} sx={{marginBottom: "20px"}} required/>
-                    <TextField label="Description" type="text" onChange={(e) => setDescription(e.target.value)} sx={{marginBottom: "20px"}} required/>
+                    <TextField label="Project Name" type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)} sx={{marginBottom: "20px"}} required/>
+                    <TextField label="Tech Stacks" type="text" value={techStack} onChange={(e) => setTechStack(e.target.value)} sx={{marginBottom: "20px"}} required/>
+                    <TextField label="Url" type="text" value={url} onChange={(e) => setUrl(e.target.value)} sx={{marginBottom: "20px"}} required/>
+                    <TextField label="Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} sx={{marginBottom: "20px"}} required/>
                 </Stack>
                 {
                     isLoading ? <LoadingButton variant="contained"><CircularProgress size={30} sx={{color: "white"}}/><span style={{marginLeft: "10px"}}>Loading</span></LoadingButton> : <Button type="submit" variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>Add Project</Button>
