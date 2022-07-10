@@ -58,7 +58,7 @@ BlogPostCard.propTypes = {
 };
 
 export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+  const { cover, name, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
@@ -119,7 +119,7 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} />
+          <CoverImgStyle alt={name} src={cover} />
         </CardMediaStyle>
 
         <CardContent
@@ -149,7 +149,7 @@ export default function BlogPostCard({ post, index }) {
               }),
             }}
           >
-            {title}
+            {name}
           </TitleStyle>
 
           <InfoStyle>
