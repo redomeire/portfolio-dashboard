@@ -117,6 +117,12 @@ export default function Register() {
                 </Link>
               </Typography>
             )}
+            <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
+                Sign in with no password?{' '}
+                <Link variant="subtitle2" href="/email-verification">
+                  Sign in
+                </Link>
+              </Typography>
           </ContentStyle>
         </Container>
       </RootStyle>

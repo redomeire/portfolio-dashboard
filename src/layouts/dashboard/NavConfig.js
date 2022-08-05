@@ -31,6 +31,11 @@ const navConfig = [
     path: '/dashboard/project',
     icon: getIcon('eos-icons:project')
   },
+  // {
+  //   title: 'Contacts',
+  //   path: '/dashboard/contact',
+  //   icon: getIcon('fluent:contact-card-16-filled')
+  // }
 ];
 
 export default navConfig;

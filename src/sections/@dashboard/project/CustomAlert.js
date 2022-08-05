@@ -8,8 +8,8 @@ export default function CustomAlert({severity, sx, children, onClose}){
 }
 
 CustomAlert.propTypes = {
-    severity: PropTypes.func.isRequired,
-    sx: PropTypes.func.isRequired,
-    children: PropTypes.func.isRequired,
+    severity: PropTypes.string.isRequired,
+    sx: PropTypes.object.isRequired,
+    children: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
 }

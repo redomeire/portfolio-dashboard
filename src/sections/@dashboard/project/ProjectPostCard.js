@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from "react";
 // material
 import { Box, Card, Button, Avatar, Typography, CardContent, CardActions, CardHeader, IconButton, CardMedia } from '@mui/material';
-
+import { styled } from '@mui/material/styles';
 import ProjectDetail from './ProjectDetail';
 
 // ----------------------------------------------------------------------
@@ -14,6 +14,15 @@ ProjectPostCard.propTypes = {
   url: PropTypes.string,
   id: PropTypes.string
 };
+
+const CustomCardMedia = styled(CardMedia)`
+  transition: ease 0.2s;
+  background-color: white;
+  &:hover {
+    opacity: 0.7;
+    filter: brightness(70%);
+  }
+`
 
 export default function ProjectPostCard({ id, name, description, techStack, url }) {
   //   const { cover } = post;
@@ -32,12 +41,12 @@ export default function ProjectPostCard({ id, name, description, techStack, url 
         }
         title={name}
       />
-      <CardMedia
+      <CustomCardMedia
         component="img"
         height="194"
         image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
         alt="paela"
-        sx={{marginTop: "10px"}}
+        sx={{marginTop: "20px"}}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary" sx={{marginBottom: "20px"}}>
