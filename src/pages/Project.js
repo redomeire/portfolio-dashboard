@@ -19,32 +19,53 @@ const SORT_OPTIONS = [
 
 export default function Project() {
   const [searchValue, setSearchValue] = React.useState('');
-  const datas = [];
   const [projects, setProjects] = React.useState([]);
+  // const changeDatas = React.useMemo(() => addNewData(), [datas])
+
+
+  const addNewData = () => {
+    setProjects([]);
+    getDocs(colRef)
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          // datas.push({ ...doc.data(), id: doc.id });
+          setProjects((prev) => [...prev, {...doc.data(), id: doc.id}])
+        })
+        // setProjects(datas);
+        console.log(projects)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   useEffect(() => {
     getDocs(colRef)
       .then(snapshot => {
         snapshot.docs.forEach(doc => {
-          datas.push({ ...doc.data(), id: doc.id });
-          /* projects([{...doc.data(), id: doc.id}]) */
+          // datas.push({ ...doc.data(), id: doc.id });
+          setProjects((prev) => [...prev, {...doc.data(), id: doc.id}])
         })
-        setProjects(datas);
-        console.log(datas)
+        // setProjects(datas);
+        console.log(projects)
       })
       .catch(err => {
         console.log(err);
       })
   }, [])
 
+  useEffect(() => {
+    
+  }, [projects])
+
   return (
-    <Page title="Dashboard: Blog">
+    <Page title="Project">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Project
           </Typography>
-          <FormDialog />
+          <FormDialog addNewData={addNewData}/>
         </Stack>
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
