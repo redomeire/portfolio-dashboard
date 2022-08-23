@@ -47,7 +47,7 @@ export default function Project() {
           setProjects((prev) => [...prev, {...doc.data(), id: doc.id}])
         })
         // setProjects(datas);
-        console.log(projects)
+        // console.log(projects)
       })
       .catch(err => {
         console.log(err);
@@ -89,7 +89,7 @@ export default function Project() {
                   return item;
                 return item.name.toUpperCase().includes(searchValue.toUpperCase());
               }).map((post, index) => (
-                <ProjectPostCard key={post.id} id={post.id} createdAt={post.createdAt} index={index} name={post.name} description={post.description} techStack={post.techStack} url={post.url} />
+                <ProjectPostCard key={post.id} id={post.id} createdAt={post.createdAt} index={index} name={post.name} description={post.description} techStack={post.techStack} url={post.url} imageUrl={post.imageUrl} />
               ))}
             </Box>
         }
