@@ -13,12 +13,13 @@ ProjectDetail.propTypes = {
     description: PropTypes.string,
     techStack: PropTypes.array,
     url: PropTypes.string,
+    imageUrl: PropTypes.string,
     id: PropTypes.string,
     open: PropTypes.bool,
     setOpen: PropTypes.func
 };
 
-function ProjectDetail({ id, name, description, techStack, url, open, setOpen }) {
+function ProjectDetail({ id, name, description, techStack, url, open, setOpen, imageUrl }) {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [showAlert, setShowAlert] = React.useState(false);
     const [isSuccess, setIsSuccess] = React.useState(false);
@@ -26,6 +27,7 @@ function ProjectDetail({ id, name, description, techStack, url, open, setOpen })
     const [newDescription, setDescription] = React.useState(description);
     const [newUrl, setUrl] = React.useState(url);
     const [newTechStack, setTechStack] = React.useState([]);
+    const [newImageUrl, setNewImageUrl] = React.useState(imageUrl);
     const [isLoading, setIsLoading] = React.useState(false);
 
 
@@ -42,7 +44,8 @@ function ProjectDetail({ id, name, description, techStack, url, open, setOpen })
             "name": newName,
             "techStack": newTechStack,
             "url": newUrl,
-            "description": newDescription
+            "description": newDescription,
+            "imageUrl": newImageUrl
         })
             .then(res => {
                 console.log(res);
@@ -89,6 +92,7 @@ function ProjectDetail({ id, name, description, techStack, url, open, setOpen })
                         <TextField label="Tech Stacks" type="text" defaultValue={techStack} onChange={(e) => handleTechStack(e.target.value)} sx={{ marginBottom: "20px" }} required />
                         <TextField label="Url" type="text" defaultValue={url} onChange={(e) => setUrl(e.target.value)} sx={{ marginBottom: "20px" }} required />
                         <TextField label="Description" type="text" defaultValue={description} onChange={(e) => setDescription(e.target.value)} sx={{ marginBottom: "20px" }} required />
+                        <TextField label="Image URL" type="text" defaultValue={imageUrl} onChange={(e) => setNewImageUrl(e.target.value)} sx={{ marginBottom: "20px" }} required />
                     </Stack>
                     {
                         isLoading ? 
