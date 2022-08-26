@@ -1,8 +1,12 @@
+import React from 'react';
+
 import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 // components
+import { getDocs } from 'firebase/firestore';
+import { colRef, users } from '../sections/auth/firebase/firebase';
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 // sections
@@ -21,7 +25,28 @@ import {
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const [projectLength, setProjectLength] = React.useState(0);
+  const [userContacts, setUserContacts] = React.useState(0);
   const theme = useTheme();
+
+  React.useEffect(() => {
+    // projects
+    getDocs(colRef)
+      .then(snapshot => {
+        setProjectLength(snapshot.docs.length)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    // users
+    getDocs(users)
+      .then(snapshot => {
+        setUserContacts(snapshot.docs.length)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
 
   return (
     <Page title="Dashboard">
@@ -31,21 +56,21 @@ export default function DashboardApp() {
         </Typography>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={714000} icon={'ant-design:android-filled'} />
+          <Grid item xs={12} sm={6} md={6}>
+            <AppWidgetSummary title="Your Projects" total={projectLength} icon={'ant-design:android-filled'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+          <Grid item xs={12} sm={6} md={6}>
+            <AppWidgetSummary title="Users Contact" total={userContacts} color="info" icon={'ant-design:apple-filled'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ant-design:bug-filled'} />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
