@@ -20,5 +20,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore();
 const colRef = collection(db, 'projects');
+const users = collection(db, 'users');
+const tasksRef = collection(db, 'tasks');
 
-export { analytics, db, app, colRef };
+export { analytics, db, app, colRef, users, tasksRef };
